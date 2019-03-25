@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+FMLCorePlugin: timaxa007.activate_block.ExampleHookLoader
+FMLCorePluginContainsFMLMod: true
+
