@@ -11,7 +11,7 @@ public class Events {
 	private static Minecraft mc = Minecraft.getMinecraft();
 
 	@SubscribeEvent
-	public void onConfigChanged(InputEvent.KeyInputEvent event) {
+	public void onConfigChanged(InputEvent event) {
 		if (Proxy.open_door.getIsKeyPressed()) {
 
 			if (mc.objectMouseOver == null) return;

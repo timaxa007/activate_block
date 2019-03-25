@@ -17,7 +17,7 @@ public class OpenDoorFMod {
 	public static final String
 	MODID = "activate_block",
 	NAME = "Activate Block Mod",
-	VERSION = "0.5.3";
+	VERSION = "0.5.4";
 
 	@Mod.Instance(MODID)
 	public static OpenDoorFMod instance;
