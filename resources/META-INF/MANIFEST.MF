@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-FMLCorePlugin: timaxa007.activate_block.ExampleHookLoader
+FMLCorePlugin: timaxa007.activate_block.asm.ExampleHookLoader
 FMLCorePluginContainsFMLMod: true
 

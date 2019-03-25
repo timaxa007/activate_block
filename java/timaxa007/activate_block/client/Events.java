@@ -3,22 +3,18 @@ package timaxa007.activate_block.client;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
 import timaxa007.activate_block.OpenDoorFMod;
 import timaxa007.activate_block.network.BlockActivatedMessage;
 
 public class Events {
 
-	static Minecraft mc = Minecraft.getMinecraft();
+	private static Minecraft mc = Minecraft.getMinecraft();
 
 	@SubscribeEvent
 	public void onConfigChanged(InputEvent.KeyInputEvent event) {
-		if (RegKey.open_door.getIsKeyPressed()) {
-			ItemStack itemstack = mc.thePlayer.inventory.getCurrentItem();
+		if (Proxy.open_door.getIsKeyPressed()) {
 
-			if (mc.objectMouseOver == null) {
-				//logger.warn("Null returned as \'hitResult\', mc shouldn\'t happen!");
-			}
+			if (mc.objectMouseOver == null) return;
 			else {
 				switch (mc.objectMouseOver.typeOfHit) {
 				case ENTITY:
@@ -39,7 +35,6 @@ public class Events {
 
 						boolean result = !net.minecraftforge.event.ForgeEventFactory.onPlayerInteract(mc.thePlayer, net.minecraftforge.event.entity.player.PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK, x, y, z, mc.objectMouseOver.sideHit, mc.theWorld).isCanceled();
 						if (result && mc.theWorld.getBlock(x, y, z).onBlockActivated(mc.theWorld, x, y, z, mc.thePlayer, mc.objectMouseOver.sideHit, hitX, hitY, hitZ)) {
-							//flag = false;
 							mc.thePlayer.swingItem();
 						}
 

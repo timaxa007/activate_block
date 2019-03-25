@@ -1,5 +1,6 @@
 package timaxa007.activate_block.network;
 
+import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -8,7 +9,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
-import timaxa007.activate_block.OpenDoorFMod;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 
 public class BlockActivatedMessage implements IMessage {
 
@@ -59,6 +62,11 @@ public class BlockActivatedMessage implements IMessage {
 		}
 
 		private void act(EntityPlayerMP player, BlockActivatedMessage packet) {
+
+			PlayerInteractEvent event = ForgeEventFactory.onPlayerInteract(player, Action.RIGHT_CLICK_BLOCK, packet.x, packet.y, packet.z, packet.side, player.worldObj);
+			if (event.isCanceled()) return;
+			if (event.useBlock == Event.Result.DENY) return;
+
 			if (player.worldObj.isAirBlock(packet.x, packet.y, packet.z)) return;
 			player.worldObj.getBlock(packet.x, packet.y, packet.z)
 			.onBlockActivated(player.worldObj, packet.x, packet.y, packet.z, player, packet.side, packet.hitX, packet.hitY, packet.hitZ);
